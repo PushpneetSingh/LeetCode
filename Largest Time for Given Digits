@@ -1,0 +1,30 @@
+class Solution {
+public:
+    string largestTimeFromDigits(vector<int>& a) {
+                
+        string s="";
+        for(int i=0;i<4;i++){
+            s+=to_string(a[i]);
+        }
+        sort(s.begin(),s.end());     
+        string ans="";
+        
+        do
+        {
+            string sub1=s.substr(0,2);
+            string sub2=s.substr(2);
+            
+            int h=stoi(sub1);
+            int sec=stoi(sub2);
+            
+            if(h>=0&&h<=23&&sec>=0&&sec<=59)
+            {
+                ans=max(ans,sub1+":"+sub2);
+            }
+            
+        }while(next_permutation(s.begin(),s.end()));
+        
+        return ans;
+        
+    }
+};
