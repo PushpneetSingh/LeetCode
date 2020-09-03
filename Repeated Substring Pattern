@@ -1,0 +1,25 @@
+class Solution {
+public:
+    bool poss(string s,string sub){
+        int ns = s.size();
+        int nss = sub.size();
+        
+        if(ns%nss != 0) return false;
+        
+        for(int i=1;i<ns;i++){
+            if(s[i] != sub[i%nss]) return false;
+        }
+        
+        return true;
+    }
+    bool repeatedSubstringPattern(string s) {
+        int n=s.size();
+        if(n==1 || n==0) return false;
+        string help="";
+        for(int i=0;i<(n/2);i++){
+            help += s[i];
+            if(poss(s,help)) return true;
+        }
+        return false;
+    }
+};
