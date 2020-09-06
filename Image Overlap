@@ -1,0 +1,35 @@
+class Solution {
+public:
+    
+    int count(int x,int y,vector<vector<int>>& A, vector<vector<int>>& B){
+        int cnt = 0;
+        int rRow = 0;
+    
+        for (int mRow = y; mRow < A.size(); ++mRow) {
+            int rCol = 0;
+            for (int mCol = x; mCol < A.size(); ++mCol) {
+                if (A[mRow][mCol] == 1 && A[mRow][mCol] == B[rRow][rCol])
+                    cnt++;
+                rCol += 1;
+            }
+            rRow += 1;
+        }
+        
+        return cnt;
+        
+    }
+    
+    int largestOverlap(vector<vector<int>>& A, vector<vector<int>>& B) {
+        int mx = 0;
+
+        for (int y = 0; y < A.size(); ++y)
+            for (int x = 0; x < A.size(); ++x) {
+                mx = max(mx, count(x, y, A, B));
+                mx = max(mx, count(x, y, B, A));
+            }
+
+        return mx;
+    }
+};
+        
+    
