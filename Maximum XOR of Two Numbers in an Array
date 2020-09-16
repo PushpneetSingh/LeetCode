@@ -1,0 +1,69 @@
+class Trie {
+public:
+    Trie* left;
+    Trie* right;
+    Trie() {
+        left = right = NULL;
+    }
+};
+
+class Solution {
+public:
+    Trie* root;
+    
+    Solution() {
+        root = new Trie();
+    }
+    
+    void insert(int num) {
+        Trie* curr = root;
+        for(int i = 31; i >= 0; i--) {
+            int bit = (num>>i)&1;
+            if(bit) {
+                if(!curr->right) {
+                    curr->right = new Trie();
+                }
+                curr = curr->right;
+            } else {
+                if(!curr->left) {
+                    curr->left = new Trie();
+                }
+                curr = curr->left;
+            }
+        }
+    }
+    
+    int findMaximumXOR(vector<int>& nums) {
+        if(nums.size() == 0) {
+            return 0;
+        }
+        for(auto num: nums) {
+            insert(num);
+        }   
+        int ans = INT_MIN;
+        for(auto num: nums) {
+            int curr_ans = 0;
+            Trie* curr = root;
+            for(int i = 31; i >= 0; i--) {
+                int bit = (num>>i)&1;
+                if(bit) {
+                    if(curr->left) {
+                        curr_ans += (1 << i);
+                        curr = curr->left;
+                    } else {
+                        curr = curr->right;
+                    }
+                } else {
+                    if(curr->right) {
+                        curr_ans += (1 << i);
+                        curr = curr->right;
+                    } else {
+                        curr = curr->left;
+                    }
+                }
+            }
+            ans = max(ans, curr_ans);
+        }
+        return ans;
+    }
+};
