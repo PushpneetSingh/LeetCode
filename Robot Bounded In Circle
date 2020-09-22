@@ -1,0 +1,32 @@
+class Solution {
+public:
+       
+    bool isRobotBounded(string ins) {
+        int n=ins.size();
+        if(n==0) return 1;
+        
+        int x=0,y=0;
+        int tx=0,ty=1;
+        
+        for(int j=0;j<4;j++){
+            for(auto i:ins){
+                if(i=='G'){
+                    x+=tx;
+                    y+=ty;
+                }
+                else if(i=='L'){
+                    int temp = tx;
+                    tx = -ty;
+                    ty = temp;
+                }
+                else{
+                    int temp = tx;
+                    tx = ty;
+                    ty = -temp;
+                }
+            }
+        }
+        if(x==0 && y==0) return 1;
+        return 0;
+    }
+};
