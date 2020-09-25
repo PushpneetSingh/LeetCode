@@ -1,0 +1,9 @@
+class Solution {
+public:
+    int lengthOfLastWord(string s) {
+        stringstream str(s);
+        string word,help;
+        while(str>>help) word=help;
+        return word.size();
+    }
+};
