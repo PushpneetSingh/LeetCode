@@ -1,0 +1,25 @@
+bool comp(int x,int y){    
+    return to_string(x)+to_string(y) > to_string(y)+to_string(x);
+}
+
+class Solution {
+public:
+    string largestNumber(vector<int>& nums) {
+        
+        int hn=0;
+        for(auto i:nums){
+            if(i==0) hn++;
+        }
+        
+        if(hn==nums.size()) return "0";
+        
+        sort(nums.begin(),nums.end(),comp);
+        string ans;
+                
+        for(auto i:nums){
+            ans += to_string(i);
+        }
+        
+        return ans;
+    }
+};
