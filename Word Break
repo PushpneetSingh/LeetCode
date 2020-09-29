@@ -1,0 +1,28 @@
+class Solution {
+public:
+    bool dp[1001][1001];
+    unordered_set<string> set;
+    unordered_map<string,bool> map;
+    
+    bool dfs(string s){
+        if(s=="") return true;
+        
+        if(map.count(s)) return map[s];
+        
+        for(int i=0;i<s.size();i++){
+            if( (set.count(s.substr(0,i+1))) && dfs(s.substr(i+1)) )
+                return true;
+        }
+        return map[s] = false;
+    }
+    
+    bool wordBreak(string s, vector<string>& wordDict) {
+        set.clear();
+        for(auto i:wordDict){
+            set.insert(i);
+        }
+        memset(dp,0,sizeof(dp));
+        return dfs(s);
+        
+    }
+};
