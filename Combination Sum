@@ -1,0 +1,30 @@
+class Solution {
+public:
+    vector<vector<int>> ans;
+    
+    void rec(vector<int> help,int i,vector<int> a,int t){
+        for(int k=i;k<a.size();k++){
+            
+            if(a[k] > t) break;
+            
+            help.push_back(a[k]);
+            
+            if(a[k] == t) ans.push_back(help);
+            else rec(help,k,a,t-a[k]);
+            
+            help.pop_back();
+        }
+        return ;
+    }
+    vector<vector<int>> combinationSum(vector<int>& a, int target) {
+        
+        int n=a.size();
+        sort(a.begin(),a.end());
+        
+        vector<int> help; 
+        
+        rec(help,0,a,target);
+        
+        return ans;
+    }
+};
