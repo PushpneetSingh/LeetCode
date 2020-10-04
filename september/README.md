@@ -1,2 +1,2 @@
 # LeetCode
-Practice questions from Leet Code Challenges.
+Practice questions from September Challenges.
